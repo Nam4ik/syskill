@@ -1,0 +1,8 @@
+[package]
+name = "suicidekit"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+clap = "4.5.50"
+rand = "0.9.2"
