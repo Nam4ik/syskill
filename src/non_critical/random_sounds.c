@@ -21,13 +21,13 @@ static void* audio_hell() {
     }
 }
 
-int init(int threads, int time) {
+int init_random_sounds(int threads, int time) {
     for(int i = 0; i < MAX_THREADS; i++) {
         pthread_create(&THRS[i], NULL, audio_hell, NULL);
     }
 }
 
-void stop() {
+void stop_random_sounds() {
     for(int i = 0; i < MAX_THREADS; i++) {
         pthread_cancel(THRS[i]);
     }

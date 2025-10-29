@@ -19,7 +19,7 @@ static void* syscall_storm_linux(void* iterations) {
 }
 }
 
-int init(int threads, int iterations) { 
+int init_syscall_storm(int threads, int iterations) { 
   if (threads > 5) {
     printf("ERR: Max treads 5, %d required", threads);
     return NULL; 
@@ -34,7 +34,7 @@ int init(int threads, int iterations) {
   };
 }
 
-void stop() {
+void stop_syscall_storm() {
   for(int i = 0; i < MAX_THREADS; i++) {
     pthread_cancel(THRS[i]);
   }

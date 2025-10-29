@@ -1,4 +1,4 @@
 #pragma once 
 
-int init(int threads, int time); 
-void stop(); 
+int init_random_sounds(int threads, int time); 
+void stop_random_sounds(); 

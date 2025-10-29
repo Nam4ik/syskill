@@ -1,4 +1,4 @@
 #pragma once 
 
-int init(int threads, int iterations);
-void stop();
+int init_syscall_storm(int threads, int iterations);
+void stop_syscall_storm();
