@@ -1,7 +1,13 @@
-#include <alsa/asoundlib.h>
+
+#define _GNU_SOURCE
+#define __timespec_defined 
+#define __struct_timespec_defined
+
+#include <time.h> 
+#include <pthread.h>
 #include <stdint.h> 
 #include <stdlib.h> 
-#include <pthread.h>
+#include <alsa/asoundlib.h>
 
 #define MAX_THREADS 5
 

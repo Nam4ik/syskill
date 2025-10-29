@@ -20,7 +20,10 @@ fn artifacts_and_kill(root: bool) -> Result<(), std::io::Error> {
             let garbage: Vec<u8> = (0..1024).map(|_| rng.gen()).collect();
             let _ = fb.write(&garbage);
         }
+        
     }
+
+    Ok(())
 }
 
 

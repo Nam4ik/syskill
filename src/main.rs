@@ -1,6 +1,6 @@
 use std::ffi::CString;
 use std::os::raw::c_int;
-use clap::{Parser, Subcommand};
+use clap::{Parser, Subcommand, command};
 
 mod non_critical;
 mod critical;
@@ -39,7 +39,7 @@ enum Commands {
 }
 
 fn main() {
-    let cli = Cli::parse();
+    let cli = Parser::parse();
 
     match cli.command {
         Commands::RandomSounds { threads, time } => unsafe {

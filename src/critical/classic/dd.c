@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 void random_data_linux(char sym_drive[16], bool random) {
     char command[55]; 
