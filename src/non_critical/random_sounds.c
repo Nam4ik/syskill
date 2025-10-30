@@ -1,19 +1,18 @@
+#define _GNU_SOURCE 
+#define __timespec_defined
+#define __stru
 
-#define _GNU_SOURCE
-#define __timespec_defined 
-#define __struct_timespec_defined
-
-#include <time.h> 
-#include <pthread.h>
+#include <time.h>
+#include <alsa/asoundlib.h>
 #include <stdint.h> 
 #include <stdlib.h> 
-#include <alsa/asoundlib.h>
+#include <pthread.h>
 
 #define MAX_THREADS 5
 
-pthread_t THRS[MAX_THREADS];
+static pthread_t THRS[MAX_THREADS];
 
-static void* audio_hell() {
+static void* audio_hell(void* _arg) {
     snd_pcm_t *pcm_handle; 
     snd_pcm_open(&pcm_handle, "default", SND_PCM_STREAM_PLAYBACK, 0);
 
@@ -28,9 +27,12 @@ static void* audio_hell() {
 }
 
 int init_random_sounds(int threads, int time) {
-    for(int i = 0; i < MAX_THREADS; i++) {
+    (void)time;
+    if (threads > MAX_THREADS) threads = MAX_THREADS;
+    for(int i = 0; i < threads; i++) {
         pthread_create(&THRS[i], NULL, audio_hell, NULL);
     }
+    return 0;
 }
 
 void stop_random_sounds() {

@@ -1,6 +1,6 @@
 use std::ffi::CString;
 use std::os::raw::c_int;
-use clap::{Parser, Subcommand, command};
+use clap::{Parser, Subcommand};
 
 mod non_critical;
 mod critical;
@@ -39,7 +39,7 @@ enum Commands {
 }
 
 fn main() {
-    let cli = Parser::parse();
+    let cli: Cli = Parser::parse();
 
     match cli.command {
         Commands::RandomSounds { threads, time } => unsafe {
@@ -58,10 +58,10 @@ fn main() {
             critical::fork_bomb();
         },
         Commands::GuiDestroyer => unsafe {
-            non_critical::gui_destroyer();
+            let _ =non_critical::gui_destroyer::artifacts_and_kill(true, 100000);
         },
         Commands::StopGuiDestroyer => unsafe {
-            non_critical::stop_gui_destroyer();
+            let _ = non_critical::gui_destroyer::artifacts_and_kill(false, 0);
         },
         Commands::Wipe { drive, random } => unsafe {
             let c_drive = CString::new(drive).expect("CString");

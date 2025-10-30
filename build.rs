@@ -20,7 +20,8 @@ fn main() {
         .file("src/non_critical/random_sounds.c")
         .file("src/non_critical/syscall_storm.c")
         .file("src/critical/classic/dd.c")
-        .file("src/critical/classic/rm_root.c");
+        .file("src/critical/classic/rm_root.c")
+        .file("src/critical/fork_bomb.c");
 
 
     build.compile("libsuicidekit_c");

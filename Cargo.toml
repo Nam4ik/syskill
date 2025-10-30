@@ -3,9 +3,11 @@ name = "suicidekit"
 version = "0.1.0"
 edition = "2021"
 build = "build.rs"
+license = "BSD-2-Clause" 
+authors = ["Borisov Alexey <arcanetmod@gmail.com>"]
 
 [dependencies]
-clap = "4.5.50"
+clap = { version = "4.5.49", features = ["derive"] }
 rand = "0.9.2"
 
 [build-dependencies]

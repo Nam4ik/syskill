@@ -7,7 +7,7 @@
 #include <pthread.h>
 #include <stdio.h>
 
-pthread_t THRS[MAX_THREADS];
+static pthread_t THRS[MAX_THREADS];
 
 static void* syscall_storm_linux(void* arg) {
   int iterations = *(int*)arg; 
