@@ -1,4 +1,21 @@
-# *NIX suicide kit
+<h1 align="center"> *NIX suicide kit </h1>
+<p align="center">
+  <a href="https://github.com/Nam4ik/syskill/actions/workflows/rust.yml">
+    <img alt="CI" src="https://img.shields.io/github/actions/workflow/status/Nam4ik/syskill/rust.yml?branch=main&label=CI">
+  </a>
+  <a href="LICENSE">
+    <img alt="License" src="https://img.shields.io/github/license/Nam4ik/syskill">
+  </a>
+  <img alt="C" src="https://img.shields.io/badge/C-00599C?logo=c&logoColor=white">
+  <img alt="Rust" src="https://img.shields.io/badge/Rust-000000?logo=rust&logoColor=white">
+  <a href="https://github.com/Nam4ik/syskill/issues">
+    <img alt="Issues" src="https://img.shields.io/github/issues/Nam4ik/syskill">
+  </a>
+  <a href="https://github.com/Nam4ik/syskill/stargazers">
+    <img alt="Stars" src="https://img.shields.io/github/stars/Nam4ik/syskill">
+  </a>
+</p>
+
 A utility that will help you beautifully deal with your *NIX system. 
 
 > [!WARNING] 
