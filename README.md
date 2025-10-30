@@ -14,9 +14,14 @@
   <a href="https://github.com/Nam4ik/syskill/stargazers">
     <img alt="Stars" src="https://img.shields.io/github/stars/Nam4ik/syskill">
   </a>
+  <br> 
+A utility that will help you beautifully deal with your *NIX system. 
+  <br>
+
+  
+  <img src="./README/sample.gif" width="460" height="450">
 </p>
 
-A utility that will help you beautifully deal with your *NIX system. 
 
 > [!WARNING] 
 > DONT USE THIS ON PRODUCTION OR REAL PC, SOME FUNCTIONS MAY CAUSE YOUR SYSTEM TO BECOME COMPLETELY UNSTABLE.
