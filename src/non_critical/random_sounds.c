@@ -1,6 +1,6 @@
 #define _GNU_SOURCE 
 #define __timespec_defined
-#define __stru
+
 
 #include <time.h>
 #include <alsa/asoundlib.h>
