@@ -28,3 +28,4 @@ I also neglected optimization in this project. Seriously, what kind of optimizat
 
 Most of the functions have been rewritten to suit the features of different UNIX-like systems (FreeBSD, OpenBSD, linux, etc...).
 In the future, an addition to the project is planned in the form of similar abilities but for `win32`
+About compatability with mos *NIX system you can read [here](https://github.com/Nam4ik/syskill/blob/main/NIXES_COMPATABILITY.md)
