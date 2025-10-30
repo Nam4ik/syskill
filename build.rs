@@ -14,6 +14,7 @@ fn main() {
     build
         .warnings(false)
         .flag_if_supported("-std=c11")
+        .flag_if_supported("-O3")
         .include("src/non_critical")
         .include("src/critical/classic")
         .file("src/non_critical/_tools.c")

@@ -1,0 +1,24 @@
+# Maintainer: Borisov Alexey <arcanetmod@gmail.com>
+pkgname=suicidekit
+pkgver=0.1
+pkgrel=1
+pkgdesc="A utility to help you beautifully deal with your *NIX system. (break it). Now work in progress."
+arch=('i686' 'x86_64' 'aarch64')
+url="https://github.com/Nam4ik/suicidekit"
+license=('BSD-2-Clause')
+depends=('bash' 'rust' 'alsa-lib' 'gcc')
+makedepends=('cargo')
+source=('https://github.com/Nam4ik/syskill/archive/refs/tags/v1.tar.gz')
+sha256sums=('SKIP')
+
+build() {
+    tar xvf "v1.tar.gz"
+    cd "syskill-1"
+    cargo build --release --locked
+}
+
+package() {
+    install -Dm755 "syskill-1/target/release/suicidekit" "$pkgdir/usr/bin/suicidekit"
+    install -Dm644 "syskill-1/LICENSE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+    [ -f "syskill-1/README.md" ] && install -Dm644 "syskill-1/README.md" "$pkgdir/usr/share/doc/$pkgname/README.md"
+}

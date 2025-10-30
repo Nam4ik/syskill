@@ -1,5 +1,6 @@
 #define _GNU_SOURCE 
 #define __timespec_defined
+#define __struct_timespec_defined 
 
 
 #include <time.h>

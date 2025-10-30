@@ -1,6 +1,6 @@
 CARGO ?= cargo
 
-.PHONY: all build run clean fmt check
+.PHONY: all build run clean fmt check install
 
 all: build
 
@@ -19,4 +19,5 @@ fmt:
 check:
 	$(CARGO) check
 
-
+install:
+	mv target/debug/suicidekit /usr/local/bin/suicidekit

