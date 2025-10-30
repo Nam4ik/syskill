@@ -15,12 +15,18 @@
     <img alt="Stars" src="https://img.shields.io/github/stars/Nam4ik/syskill">
   </a>
   <br> 
-A utility that will help you beautifully deal with your *NIX system. 
-  <br>
-
-  
-  <img src="./README/sample.gif" width="460" height="450">
 </p>
+
+___________________________
+
+<div align="center">
+  <img src="./README/sample.gif" width="460" height="450">
+
+____________________________
+**A utility that will help you beautifully deal with your UNIX system.**
+
+</div>
+
 
 
 > [!WARNING] 
