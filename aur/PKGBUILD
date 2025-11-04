@@ -7,7 +7,6 @@ arch=('i686' 'x86_64' 'aarch64')
 url="https://github.com/Nam4ik/suicidekit"
 license=('BSD-2-Clause')
 depends=('bash' 'rust' 'alsa-lib' 'gcc' 'libx11')
-makedepends=('cargo')
 source=('https://github.com/Nam4ik/syskill/archive/refs/tags/v1-rc0.tar.gz')
 sha256sums=('SKIP')
 
