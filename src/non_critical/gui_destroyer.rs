@@ -75,7 +75,6 @@ unsafe fn artifacts_x11() -> xlib::Window {
     let mut xattr: xlib::XSetWindowAttributes = std::mem::zeroed();
     xattr.background_pixel = xlib::XBlackPixel(dsp, screen);
 
-    // Создаем окно с потенциально проблемными параметрами
     let win = xlib::XCreateWindow(
         dsp,
         root_window,
@@ -86,7 +85,7 @@ unsafe fn artifacts_x11() -> xlib::Window {
         0,      // border_width
         xlib::CopyFromParent as i32,  // depth
         xlib::InputOutput as u32,     // class
-        ptr::null_mut(),              // visual - используем null вместо *CopyFromParent
+        ptr::null_mut(),              // visual 
         xlib::CWBackPixel as u64,     // value_mask
         &mut xattr                    // attributes
     );
