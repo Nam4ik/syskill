@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 #include <string.h>
@@ -40,4 +41,12 @@ char* get_os_name() {
 
     fclose(file);
     return NULL;
+}
+
+char* get_desktop_server() {
+    if(getenv("XDG_SESSION_TYPE") != NULL) { 
+        return getenv("XDG_SESSION_TYPE");
+    } else {
+        return NULL; 
+    }
 }

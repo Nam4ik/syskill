@@ -1,0 +1,18 @@
+pkgbase = suicidekit
+	pkgdesc = A utility to help you beautifully deal with your *NIX system. (break it). Now work in progress.
+	pkgver = 0.1
+	pkgrel = 1
+	url = https://github.com/Nam4ik/suicidekit
+	arch = i686
+	arch = x86_64
+	arch = aarch64
+	license = BSD-2-Clause
+	makedepends = cargo
+	depends = bash
+	depends = rust
+	depends = alsa-lib
+	depends = gcc
+	source = https://github.com/Nam4ik/syskill/archive/refs/tags/v1.tar.gz
+	sha256sums = SKIP
+
+pkgname = suicidekit
