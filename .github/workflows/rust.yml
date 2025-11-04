@@ -33,8 +33,7 @@ jobs:
           bash -c "
             pacman -Sy --noconfirm base-devel git rustup &&
             useradd -m builder &&
-            chown -R builder:builder /github/workspace
-
+            chown -R builder:builder /github/workspace &&
             sudo -u builder makepkg -sf
           "
 
