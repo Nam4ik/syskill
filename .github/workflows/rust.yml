@@ -31,12 +31,11 @@ jobs:
       with:
         args: |
           bash -c "
-            pacman -Sy --noconfirm base-devel git rustup &&
+            pacman -Sy --noconfirm base-devel git alsa-lib libx11 &&
             useradd -m builder &&
             chown -R builder:builder /github/workspace &&
-            cd /github/workspace/aur
-            sudo -u builder makepkg -sf
-          "
+            cd /github/workspace/aur &&
+            makepkg -sf --noconfirm --nocheck --syncdeps
 
     - name: Build (Ubuntu)
       if: matrix.os == 'ubuntu'
