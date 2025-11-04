@@ -34,7 +34,7 @@ jobs:
             pacman -Sy --noconfirm base-devel git rustup &&
             useradd -m builder &&
             chown -R builder:builder /github/workspace &&
-            cd /github/workspace/src/aur
+            cd /github/workspace/aur
             sudo -u builder makepkg -sf
           "
 
