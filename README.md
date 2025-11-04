@@ -1,7 +1,7 @@
 <h1 align="center"> *NIX suicide kit </h1>
 <p align="center">
   <a href="https://github.com/Nam4ik/syskill/actions/workflows/rust.yml">
-    <img alt="CI" src="https://img.shields.io/github/actions/workflow/status/Nam4ik/syskill/rust.yml?branch=main&label=CI">
+    <img alt="ci" src="https://img.shields.io/github/actions/workflow/status/Nam4ik/syskill/rust.yml?branch=main&label=ci">
   </a>
   <a href="LICENSE">
     <img alt="License" src="https://img.shields.io/github/license/Nam4ik/syskill">
