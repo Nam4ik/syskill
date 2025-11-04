@@ -12,7 +12,7 @@ sha256sums=('SKIP')
 
 build() {
     tar xvf "v1-rc0.tar.gz"
-    cd "syskill-1"
+    cd "syskill-1-rc0"
     cargo build --release --locked
 }
 
