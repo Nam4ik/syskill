@@ -11,16 +11,34 @@ env:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu, archlinux]
 
     steps:
     - uses: actions/checkout@v4
-    - name: Deps
-      run: sudo apt install libasound2-dev libx11-dev makepkg
-    - name: Build
+
+    - name: Setup environment (Ubuntu)
+      if: matrix.os == 'ubuntu'
+      run: |
+        sudo apt update
+        sudo apt install -y libasound2-dev libx11-dev
+
+    - name: Setup environment and build (Arch Linux)
+      if: matrix.os == 'archlinux'
+      uses: docker://archlinux:latest
+      with:
+        args: |
+          bash -c "
+            pacman -Sy --noconfirm base-devel git rustup &&
+            makepkg -sf
+          "
+
+    - name: Build (Ubuntu)
+      if: matrix.os == 'ubuntu'
       run: cargo build --verbose --release
-    - name: Run tests
-      run: cargo test --verbose 
-    - name: MakePKG test
-      run: makepkg 
+
+    - name: Test (Ubuntu)
+      if: matrix.os == 'ubuntu'
+      run: cargo test --verbose
