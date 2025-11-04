@@ -33,10 +33,11 @@ jobs:
           bash -c "
             pacman -Sy --noconfirm base-devel git alsa-lib libx11 rustup &&
             useradd -m builder &&
-            rustup default stable &&
             chown -R builder:builder /github/workspace &&
             cd /github/workspace/aur &&
-            sudo -u builder bash -c 'makepkg -sf --noconfirm --nocheck --syncdeps'"
+            sudo -u builder bash -c '
+            rustup default stable &&
+            makepkg -sf --noconfirm --nocheck --syncdeps'"
 
     - name: Build (Ubuntu)
       if: matrix.os == 'ubuntu'
