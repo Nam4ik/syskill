@@ -27,13 +27,9 @@ fn main() {
 
     build.compile("libsuicidekit_c");
 
-
-    #[cfg(target_os = "linux")]
-    {
-
-        println!("cargo:rustc-link-lib=asound");
-        println!("cargo:rustc-link-lib=pthread");
-    }
+    println!("cargo:rustc-link-lib=asound");
+    println!("cargo:rustc-link-lib=X11");
+    println!("cargo:rustc-link-lib=pthread");
 }
 
 
