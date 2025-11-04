@@ -32,7 +32,8 @@ jobs:
         args: |
           bash -c "
             pacman -Sy --noconfirm base-devel git rustup &&
-            makepkg -sf
+            useradd -m builder &&
+            sudo -u builder makepkg -sf
           "
 
     - name: Build (Ubuntu)
