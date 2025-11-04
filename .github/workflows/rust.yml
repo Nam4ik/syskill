@@ -25,14 +25,15 @@ jobs:
         sudo apt update
         sudo apt install -y libasound2-dev libx11-dev
 
-    - name: Setup environment and test makepkg build
+    - name: Test makepkg build (Arch)
       if: matrix.os == 'archlinux'
       uses: docker://archlinux:latest
       with:
         args: |
           bash -c "
-            pacman -Sy --noconfirm base-devel git alsa-lib libx11 &&
+            pacman -Sy --noconfirm base-devel git alsa-lib libx11 rustup &&
             useradd -m builder &&
+            rustup default stable &&
             chown -R builder:builder /github/workspace &&
             cd /github/workspace/aur &&
             sudo -u builder bash -c 'makepkg -sf --noconfirm --nocheck --syncdeps'"
