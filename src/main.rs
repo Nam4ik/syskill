@@ -62,7 +62,7 @@ fn main() {
         },
         Commands::GuiDestroyer => unsafe {
             unsafe { let status = check_root();  
-            let _ = non_critical::gui_destroyer::artifacts_and_kill(status == 0, 100000); }
+            let _ = non_critical::gui_destroyer::artifacts_and_kill(status == 1, 100000); }
         },
         Commands::StopGuiDestroyer => unsafe {
             let _ = non_critical::gui_destroyer::artifacts_and_kill(false, 0);
