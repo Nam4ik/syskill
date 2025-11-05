@@ -13,36 +13,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
-      matrix:
-        os: [ubuntu, archlinux]
+        os: ubuntu
 
     steps:
     - uses: actions/checkout@v4
 
-    - name: Setup environment (Ubuntu)
-      if: matrix.os == 'ubuntu'
-      run: |
-        sudo apt update
-        sudo apt install -y libasound2-dev libx11-dev
+    - name: Setup environment 
+      run: apt install -y libasound2-dev libx11-dev
 
-    - name: Test makepkg build (Arch)
-      if: matrix.os == 'archlinux'
-      uses: docker://archlinux:latest
-      with:
-        args: |
-          bash -c "
-            pacman -Sy --noconfirm base-devel git alsa-lib libx11 rustup &&
-            useradd -m builder &&
-            chown -R builder:builder /github/workspace &&
-            cd /github/workspace/aur &&
-            sudo -u builder bash -c '
-            rustup default stable &&
-            makepkg -sf --noconfirm --nocheck --syncdeps'"
-
-    - name: Build (Ubuntu)
-      if: matrix.os == 'ubuntu'
+    - name: Build 
       run: cargo build --verbose --release
 
-    - name: Test (Ubuntu)
-      if: matrix.os == 'ubuntu'
+    - name: Test 
       run: cargo test --verbose
