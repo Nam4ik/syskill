@@ -39,6 +39,8 @@ enum Commands {
     ForkBomb,
     GuiDestroyer,
     StopGuiDestroyer,
+    KmodPanic, 
+    SysRQPanic
 }
 
 fn main() {
@@ -73,6 +75,15 @@ fn main() {
         },
         Commands::RemoveRoot => unsafe {
             critical::remove_root();
+        },
+        Commands::KmodPanic => {
+            match non_critical::kern_panic::kmod_panic() {
+                Ok(_) => println!("Kernel module loaded successfully"),
+                Err(e) => eprintln!("Error loading kernel module: {}", e),
+            }
+        },
+        Commands::SysRQPanic => unsafe {
+            non_critical::kern_panic::sysrq_panic();
         },
     }
 }

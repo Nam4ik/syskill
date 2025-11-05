@@ -1,4 +1,5 @@
 pub mod gui_destroyer;
+pub mod kern_panic;
 
 use std::os::raw::{c_char, c_int};
 

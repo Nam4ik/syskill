@@ -67,7 +67,7 @@ fn main() {
         if ko_file.exists() {
             let out_ko = out_dir.join("linux_kmod.ko");
             std::fs::copy(&ko_file, &out_ko)
-                .expect("Coulnd cp module to OUT_DIR");
+                .expect("CМодуль ядра собранule to OUT_DIR");
             println!("cargo:warning=Cmod builded: {}", out_ko.display());
         }
     }
