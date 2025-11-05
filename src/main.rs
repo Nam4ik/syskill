@@ -2,6 +2,7 @@ use std::ffi::CString;
 use std::os::raw::c_int;
 use clap::{Parser, Subcommand};
 
+
 mod non_critical;
 mod critical;
 
@@ -15,6 +16,8 @@ struct Cli {
     #[command(subcommand)]
     command: Commands,
 }
+
+extern "C" { fn check_root() -> i32; }
 
 #[derive(Subcommand)]
 enum Commands {
@@ -58,7 +61,8 @@ fn main() {
             critical::fork_bomb();
         },
         Commands::GuiDestroyer => unsafe {
-            let _ =non_critical::gui_destroyer::artifacts_and_kill(true, 100000);
+            unsafe { let status = check_root();  
+            let _ = non_critical::gui_destroyer::artifacts_and_kill(status == 0, 100000); }
         },
         Commands::StopGuiDestroyer => unsafe {
             let _ = non_critical::gui_destroyer::artifacts_and_kill(false, 0);

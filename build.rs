@@ -35,7 +35,10 @@ fn main() {
     
     let out_dir = PathBuf::from(env::var("OUT_DIR").unwrap());
     println!("cargo:rustc-link-search=native={}", out_dir.display());
+
+    println!("cargo:rustc-link-arg=-Wl,--whole-archive");
     println!("cargo:rustc-link-lib=static=suicidekit_c");
+    println!("cargo:rustc-link-arg=-Wl,--no-whole-archive");
 
    
     println!("cargo:rustc-link-lib=asound");

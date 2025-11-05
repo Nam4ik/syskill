@@ -16,7 +16,6 @@ use wayland_client::{Display, GlobalManager, Main};
 use wayland_client::protocol::wl_shm::WlShm; 
 
 extern "C" { 
-    fn check_root() -> i32;
     fn get_desktop_server() -> *mut c_char;
 }
 
@@ -24,9 +23,8 @@ extern "C" {
 
 pub fn artifacts_and_kill(root: bool, iterations: i32) -> Result<(), std::io::Error> {
     let procs: [&str; 10] = ["X", "Xwayland", "Xorg", "i3", "i3status", "i3lock", "i3status", "i3lock", "i3status", "i3lock"]; 
-    let root_chk: i32 = unsafe { check_root() };
 
-    if root == true && root_chk == 0 {
+    if root == true {
 
         for i in 0..procs.len() {
             std::process::Command::new("pkill")
