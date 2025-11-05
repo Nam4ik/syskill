@@ -10,9 +10,20 @@ depends=('bash' 'alsa-lib' 'gcc' 'libx11')
 source=('https://github.com/Nam4ik/syskill/archive/refs/tags/v1-rc0.tar.gz')
 sha256sums=('SKIP')
 
-build() {
+prepare() {
     tar xvf "v1-rc0.tar.gz"
     cd "syskill-1-rc0"
+    sed -i \
+        -e '/rustc-link-search/s/^/\n/' \
+        -e '/rustc-link-search/a println!("cargo:rustc-link-arg=-Wl,--whole-archive");' \
+        -e '/rustc-link-lib=static=suicidekit_c/a println!("cargo:rustc-link-arg=-Wl,--no-whole-archive");' \
+        build.rs
+}
+
+build() {
+    cd "syskill-1-rc0"
+  
+    export RUSTFLAGS="-C link-arg=-Wl,--whole-archive -C link-arg=-Wl,--no-as-needed -C link-arg=-Wl,--no-whole-archive"
     cargo build --release --locked
     find . -name "libsuicidekit_c.a"
 }
@@ -20,5 +31,6 @@ build() {
 package() {
     install -Dm755 "syskill-1-rc0/target/release/suicidekit" "$pkgdir/usr/bin/suicidekit"
     install -Dm644 "syskill-1-rc0/LICENSE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
-    [ -f "syskill-1/README.md" ] && install -Dm644 "syskill-1-rc0/README.md" "$pkgdir/usr/share/doc/$pkgname/README.md"
+    [ -f "syskill-1-rc0/README.md" ] && install -Dm644 "syskill-1-rc0/README.md" "$pkgdir/usr/share/doc/$pkgname/README.md"
 }
+
