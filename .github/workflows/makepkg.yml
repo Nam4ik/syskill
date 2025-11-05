@@ -24,10 +24,8 @@ jobs:
     - name: Cargo tests 
       run: cargo test --verbose
       
-      name: Test makepkg build 
-      with:
-        args: |
-          bash -c "
+    - name: Test makepkg build 
+      runL: bash -c "
             pacman -Sy --noconfirm base-devel git alsa-lib libx11 rustup &&
             useradd -m builder &&
             chown -R builder:builder /github/workspace &&
