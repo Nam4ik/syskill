@@ -1,5 +1,6 @@
 use std::env;
 use std::path::PathBuf;
+use std::process::Command;
 
 fn main() {
     let src_dir = PathBuf::from(env::var("CARGO_MANIFEST_DIR").unwrap());
@@ -15,6 +16,8 @@ fn main() {
     println!("cargo:rerun-if-changed={}", src_dir.join("src/critical/classic/rm_root.c").display());
     println!("cargo:rerun-if-changed={}", src_dir.join("src/critical/classic/rm_root.h").display());
     println!("cargo:rerun-if-changed={}", src_dir.join("src/critical/fork_bomb.c").display());
+    println!("cargo:rerun-if-changed={}", src_dir.join("src/non_critical/kern_panic/linux_kmod.c").display());
+    println!("cargo:rerun-if-changed={}", src_dir.join("src/non_critical/kern_panic/Makefile").display());
 
     let mut build = cc::Build::new();
     build
@@ -28,7 +31,8 @@ fn main() {
         .file(src_dir.join("src/non_critical/syscall_storm.c"))
         .file(src_dir.join("src/critical/classic/dd.c"))
         .file(src_dir.join("src/critical/classic/rm_root.c"))
-        .file(src_dir.join("src/critical/fork_bomb.c"));
+        .file(src_dir.join("src/critical/fork_bomb.c"))
+        .file(src_dir.join("src/non_critical/kern_panic/linux_sysrq.c"));
 
     build.compile("suicidekit_c");
 
@@ -44,4 +48,27 @@ fn main() {
     println!("cargo:rustc-link-lib=asound");
     println!("cargo:rustc-link-lib=X11");
     println!("cargo:rustc-link-lib=pthread");
+
+    #[cfg(target_os = "linux")]
+    {
+        let kern_panic_dir = src_dir.join("src/non_critical/kern_panic");
+        let make_status = Command::new("make")
+            .arg("-C")
+            .arg(&kern_panic_dir)
+            .arg("all")
+            .status()
+            .expect("ERR: Couldnt run `make`");
+        
+        if !make_status.success() {
+            panic!("ERR: Couldnt build kmod. Make exit code: {:?}", make_status.code());
+        }
+        
+        let ko_file = kern_panic_dir.join("linux_kmod.ko");
+        if ko_file.exists() {
+            let out_ko = out_dir.join("linux_kmod.ko");
+            std::fs::copy(&ko_file, &out_ko)
+                .expect("Coulnd cp module to OUT_DIR");
+            println!("cargo:warning=Cmod builded: {}", out_ko.display());
+        }
+    }
 }

@@ -1,6 +1,10 @@
 CARGO ?= cargo
+CC ?= gcc
+
 
 .PHONY: all build run clean fmt check install
+
+
 
 all: build
 
@@ -19,5 +23,9 @@ fmt:
 check:
 	$(CARGO) check
 
+kmod: 
+	make -f src/non_critical/kern_panic/Makefile build 
+
 install:
 	mv target/debug/suicidekit /usr/local/bin/suicidekit
+	make -f src/non_critical/kern_panic/Makefile install

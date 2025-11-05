@@ -91,6 +91,8 @@ unsafe fn artifacts_x11() -> xlib::Window {
     win
 }
 
+
+// WARNING: Compositor can deny the request, big compositors like kwin_wl will deny the request
 fn wayland_corrupt_buffer() -> Result<(), Box<dyn Error>> {
     let display = Display::connect_to_env()?;
     let mut event_queue = display.create_event_queue();
