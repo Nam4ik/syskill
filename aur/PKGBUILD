@@ -13,8 +13,8 @@ sha256sums=('SKIP')
 build() {
     tar xvf "v1-rc0.tar.gz"
     cd "syskill-1-rc0"
-    find . -name "libsuicidekit_c.a"
     cargo build --release --locked
+    find . -name "libsuicidekit_c.a"
 }
 
 package() {
