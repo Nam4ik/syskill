@@ -24,7 +24,7 @@ jobs:
       uses: Swatinem/rust-cache@v2
     - name: Build
       run: | 
-        sudo apt install -y libx11-dev alsa-lib
+        sudo apt install -y libx11-dev libasound2-dev
         cargo build --verbose
     - name: Run tests
       run: cargo test --verbose
