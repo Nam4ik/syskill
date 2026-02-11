@@ -24,6 +24,8 @@ ___________________________
 
 ____________________________
 **A utility that will help you beautifully deal with your UNIX system.**
+> [!WARNING]
+> To get working `kmod-panic` you need to build project itself. 
 
 </div>
 
