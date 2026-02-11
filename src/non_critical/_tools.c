@@ -35,7 +35,15 @@ char* get_os_name() {
             if (end != NULL) {
                 *end = '\0';
             }
-            return name;
+            
+            // Allocate memory for the result and copy the string
+            char* result = malloc(strlen(name) + 1);
+            if (result != NULL) {
+                strcpy(result, name);
+            }
+            
+            fclose(file);
+            return result;
         }
     }
 

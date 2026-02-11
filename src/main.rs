@@ -6,9 +6,6 @@ use clap::{Parser, Subcommand};
 mod non_critical;
 mod critical;
 
-#[path = "critical/classic/mod.rs"]
-mod critical_classic;
-
 #[derive(Parser)]
 #[command(name = "suicidekit")]
 #[command(about = "Toolkit: Critical and non-critical loads", long_about = None)]
@@ -62,11 +59,11 @@ fn main() {
         Commands::ForkBomb => unsafe {
             critical::fork_bomb();
         },
-        Commands::GuiDestroyer => unsafe {
-            unsafe { let status = check_root();  
-            let _ = non_critical::gui_destroyer::artifacts_and_kill(status == 1, 100000); }
+        Commands::GuiDestroyer => {
+            let status = unsafe { check_root() };
+            let _ = non_critical::gui_destroyer::artifacts_and_kill(status == 1, 100000);
         },
-        Commands::StopGuiDestroyer => unsafe {
+        Commands::StopGuiDestroyer => {
             let _ = non_critical::gui_destroyer::artifacts_and_kill(false, 0);
         },
         Commands::Wipe { drive, random } => unsafe {

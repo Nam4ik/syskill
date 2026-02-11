@@ -1,15 +1,12 @@
-#![no_main]
-#![feature(let_chains)]
-
 use std::ffi::CStr;
-use std::io::Write;  
-use std::ptr; 
-use std::fs::OpenOptions; 
-use std::os::unix::io::{AsRawFd, IntoRawFd};
+use std::io::Write;
+use std::ptr;
+use std::fs::OpenOptions;
+use std::os::unix::io::IntoRawFd;
 use std::os::raw::c_char;
 use std::error::Error;
 
-use rand::{Rng};
+use rand::Rng;
 
 use x11::xlib;
 use wayland_client::{Display, GlobalManager, Main};
@@ -34,10 +31,10 @@ pub fn artifacts_and_kill(root: bool, iterations: i32) -> Result<(), std::io::Er
         }
 
         let mut fb = std::fs::File::open("/dev/fb0").unwrap();
-        let mut rng = rand::thread_rng();
-
+        let mut rng = rand::rng();
+        
         for _ in 0..iterations {
-            let garbage: Vec<u8> = (0..1024).map(|_| rng.gen()).collect();
+            let garbage: Vec<u8> = (0..1024).map(|_| rng.random()).collect();
             let _ = fb.write(&garbage);
         }
 
@@ -106,7 +103,7 @@ fn wayland_corrupt_buffer() -> Result<(), Box<dyn Error>> {
         .map_err(|_| "wl_shm not available")?;
 
     let tmp_path = std::env::temp_dir().join(format!("wl_broken_{}.tmp", std::process::id()));
-    let mut f = OpenOptions::new()
+    let f = OpenOptions::new()
         .read(true)
         .write(true)
         .create(true)
